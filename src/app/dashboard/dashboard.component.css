@@ -1,0 +1,25 @@
+.btn{
+    padding: 12px 50px;
+}
+nav{
+    margin: 0;
+    height: 85px;
+    background: #007bff;
+}
+.logo-brand{
+    height: 66px;
+}
+.navbar-brand{
+    color: white;
+    font-size: 32px;
+}
+.logout-sm{
+    display: none;
+}
+.logout{
+    color:white;
+    font-size: 22px;
+}
+.btn-group{
+    margin-top: -72px;
+}

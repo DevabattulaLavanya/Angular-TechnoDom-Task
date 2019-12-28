@@ -1,0 +1,33 @@
+<div class="offset-md-4 mt-5 pt-5 col-md-4 border">
+    <img
+            src="https://technodom.in/assets/img/Technodom_logo.png" class="logo-brand">
+    <h2 class="text-center">Login</h2>
+    <div class="alert alert-danger" *ngIf="statusCode">
+        {{details}}
+    </div>
+    <div class="alert alert-success">
+        <p class="mb-1">Employee login Credientials </p>
+        Employee Id: EMPST003
+        pwd: 12345678
+    </div>
+    <form name="form" (ngSubmit)="loginfun()">
+        <div class="form-group">
+            <label for="email">Employee Id</label>
+            <input type="text" class="form-control" name="employeeId" [(ngModel)]="model.employee_id"
+                #employeeId="ngModel" placeholder="Enter Employee Id" required />
+
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" [(ngModel)]="model.password"
+                placeholder="Enter password" #password="ngModel" required />
+
+        </div>
+        <div class="row">
+            <div class="offset-md-3 col-md-6">
+                <button class="btn btn-primary ">Login</button>
+
+            </div>
+        </div>
+    </form>
+</div>

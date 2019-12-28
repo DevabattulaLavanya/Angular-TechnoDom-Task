@@ -1,0 +1,213 @@
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="javascript:void(0)"><img
+            src="https://technodom.in/assets/img/Technodom_logo.png" class="logo-brand">echnodom Task</a>
+    <a routerLink="/" class="logout-sm"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav mr-auto">
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right ">
+            <li class="nav-item"><a href="javascript:void(0)" class="logout" (click)="logout()"><i
+                        class="fa fa-sign-out" aria-hidden="true"></i>
+                    Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div class="btn-group btn-group-lg d-block text-center ">
+        <button type="button" class="btn btn-primary" [ngClass]="{'active': employessView}"
+            (click)="getEmployees()">Employees Info</button>
+        <button type="button" class="btn btn-primary" [ngClass]="{'active': productsView}"
+            (click)="getproducts()">Products Info</button>
+    </div>
+</div>
+
+<div class="container mt-5 mb-5 border" *ngIf="employessView">
+    <h5 class="text-center mb-5 pt-4">Employees List
+    </h5>
+    <div class="row">
+        <div class="offset-sm-2 col-sm-8" *ngFor="let userlist of userList">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <b>Name:</b><span> {{userlist.first_name}} {{userlist.last_name}}</span> &nbsp; <b>Emp Id :</b>
+                    &nbsp;<span>{{userlist.employee_id}}</span>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <img src="https://image.flaticon.com/icons/png/512/17/17004.png" class="card-img-top"
+                                *ngIf="!userlist.photo">
+                            <img class="card-img-top" src="{{userlist.photo}}" *ngIf="userlist.photo">
+                        </div>
+
+                        <div class="col-sm-8">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <b><i class="fa fa-envelope-open-o" aria-hidden="true"></i> &nbsp;Email&nbsp;&nbsp;:
+                                    </b><br>
+                                    <b><i class="fa fa-phone" aria-hidden="true"></i>&nbsp; Mobile
+                                        Number&nbsp;&nbsp;:</b><br>
+                                    <b><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;Date Of
+                                        Joining&nbsp;&nbsp;:
+                                    </b><br>
+                                    <b><i class="fa fa-map" aria-hidden="true">&nbsp;</i>Address&nbsp;&nbsp;:
+                                    </b><br>
+                                    <b><i class="fa fa-users" aria-hidden="true"></i>&nbsp;User
+                                        Name&nbsp;&nbsp;:</b><br>
+                                    <b><i class="fa fa-rupee" aria-hidden="true"></i>&nbsp;Salary&nbsp;&nbsp;:</b><br>
+                                </div>
+
+                                <div class="col-md-7">
+                                    <span>{{userlist.email}}</span><br>
+                                    <span>{{userlist.phone}}</span><br>
+                                    <span>{{userlist.joining_date | date}}</span><br>
+                                    <span>{{userlist.address}}</span><br>
+                                    <span>{{userlist.user_name}}</span><br>
+                                    <span>{{userlist.salary}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal"
+                    (click)="getEmployeesbyId(userlist.id)"><i class="fa fa-user-circle-o"></i> Get User Info</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 mb-5 border" *ngIf="productsView">
+    <h5 class="text-center mb-5 pt-4">Products List
+    </h5>
+    <div class="row">
+        <div class="offset-sm-1 col-sm-10" *ngFor="let productsList of productsList">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <b>Name:</b> &nbsp;<span> {{productsList.name}} </span>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <b><i class="fa fa-window-restore" aria-hidden="true"></i> &nbsp;Store
+                                        Id&nbsp;&nbsp;:
+                                    </b><br>
+                                    <b><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp; Created At
+                                        &nbsp;&nbsp;:</b><br>
+                                    <b><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;Updated
+                                        At&nbsp;&nbsp;:
+                                    </b><br>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <span>{{productsList.store_id}}</span><br>
+                                    <span>{{productsList.created_at | date}}</span><br>
+                                    <span>{{productsList.updated_at | date}}</span><br>
+                                </div>
+                            </div>
+                                <!-- Subctegory list -->   <h4 class="my-3">Sub Categories</h4>
+                                <div class="row mt-2 mb-2">
+ 
+                                    <div class="col-md-4" *ngFor="let subcategoryList of productsList.subcategory">
+                                       
+                                        <div class="card mt-2 mb-4">
+                                            <div class="card-header">
+                                                <b>Name:</b> &nbsp; <span>{{subcategoryList.name}}</span>
+                                            </div>
+                                            <div class="card-body">
+    
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <b>
+                                                            &nbsp;Store
+                                                            Id&nbsp;&nbsp;:
+                                                        </b><br>
+                                                        <b>
+                                                            Created At
+                                                            &nbsp;&nbsp;:</b><br>
+                                                        <b>Updated
+                                                            At&nbsp;&nbsp;:
+                                                        </b><br>
+                                                    </div>
+    
+                                                    <div class="col-md-6">
+                                                        <span>{{subcategoryList.category_id}}</span><br>
+                                                        <span>{{subcategoryList.created_at | date}}</span><br>
+                                                        <span>{{subcategoryList.updated_at | date}}</span><br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- END subcategory list -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+</div>
+
+
+<div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4>Employee Details </h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img src="https://image.flaticon.com/icons/png/512/17/17004.png" class="card-img-top"
+                            *ngIf="!userpic">
+                        <img class="card-img-top" src="{{userpic}}" *ngIf="userpic">
+                    </div>
+
+                    <div class="col-sm-8">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <b><i class="fa fa-envelope-open-o" aria-hidden="true"></i> &nbsp;Email&nbsp;&nbsp;:
+                                </b><br>
+                                <b><i class="fa fa-phone" aria-hidden="true"></i>&nbsp; Mobile
+                                    Number&nbsp;&nbsp;:</b><br>
+                                <b><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;Date Of
+                                    Joining&nbsp;&nbsp;:
+                                </b><br>
+                                <b><i class="fa fa-map" aria-hidden="true">&nbsp;</i>Address&nbsp;&nbsp;:
+                                </b><br>
+                                <b><i class="fa fa-users" aria-hidden="true"></i>&nbsp;User
+                                    Name&nbsp;&nbsp;:</b><br>
+                                <b><i class="fa fa-rupee" aria-hidden="true"></i>&nbsp;Salary&nbsp;&nbsp;:</b><br>
+                            </div>
+
+                            <div class="col-md-7">
+                                <span>{{useremail}}</span><br>
+                                <span>{{userphone}}</span><br>
+                                <span>{{userjoining_date | date}}</span><br>
+                                <span>{{useraddress}}</span><br>
+                                <span>{{useruser_name}}</span><br>
+                                <span>{{usersalary}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
